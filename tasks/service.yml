@@ -1,0 +1,2 @@
+- name: Service - Start Logstash
+  service: name=logstash state=started enabled=yes

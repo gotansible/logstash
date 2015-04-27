@@ -1,0 +1,17 @@
+---
+- name: logstash - install debian
+  include: install_debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: logstash - install centos
+  include: install_centos.yml
+  when: ansible_os_family == "RedHat"
+
+- name: logstash - configure
+  include: config.yml
+
+- name: logstash - auth
+  include: auth.yml
+
+- name: logstash - service
+  include: service.yml
