@@ -9,6 +9,8 @@
     src={{ logstash_ssl_cert_file }}
     dest={{ logstash_ssl_dir }}/logstash.crt
     mode=0644
+    owner=logstash
+    group=logstash
   notify: restart logstash
 
 - name: Auth - copy private key

@@ -23,3 +23,10 @@
     - filter-syslog.conf
   notify: restart logstash
 
+- name: Config - Install Plugins
+  shell: /opt/logstash/bin/plugin {{ item }}
+  with_items:
+    - logstash-input-lumberjack
+    - logstash-filter-json
+    - logstash-output-elasticsearch
+
