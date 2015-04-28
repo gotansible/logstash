@@ -11,5 +11,11 @@ openssl rsa -in myssl.key.org -out myssl.key
 rm myssl.key.org
 
 echo "Generating certificate..."
-openssl x509 -req -days 7200 -in myssl.csr -signkey myssl.key -out myssl.crt
+openssl x509 -req -days 7200 -in myssl.csr -signkey myssl.key -out myssl.crt -extfile openssl.cnf -extensions v3_ca
 rm myssl.csr
+
+# -config ./openssl.cnf
+#http://www.flatmtn.com/article/setting-openssl-create-certificates
+# Edit /etc/ssl/openssl.cnf 
+# add subjectAltName = IP:192.168.2.107 in [v3_ca] section
+# generate cert

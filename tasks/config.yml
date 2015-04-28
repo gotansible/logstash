@@ -1,10 +1,10 @@
 ---
 - name: Config - Inputs and Outputs
   template:
-    src: "{{ item }}.j2"
-    dest: "/etc/logstash/conf.d/{{ item }}"
-    owner: logstash
-    group: logstash
+    src={{ item }}.j2
+    dest=/etc/logstash/conf.d/{{ item }}
+    owner=logstash
+    group=logstash
     mode: 0644
   with_items:
     - 01-local-syslog-input.conf
@@ -14,10 +14,10 @@
 
 - name: Config - Filters
   copy:
-    src: "{{ item }}"
-    dest: "/etc/logstash/conf.d/{{ item }}"
-    owner: logstash
-    group: logstash
+    src={{ item }}
+    dest=/etc/logstash/conf.d/{{ item }}
+    owner=logstash
+    group=logstash
     mode: 0644
   with_items:
     - filter-syslog.conf
