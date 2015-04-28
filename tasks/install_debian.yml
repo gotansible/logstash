@@ -29,6 +29,6 @@
 - name: Debian - Use adm group to enable rights to /var/log
   user:
     name: logstash
-    group: adm
-    #groups: adm
+    group: logstash
+    groups: adm
 
