@@ -7,21 +7,21 @@
     group=logstash
     mode=0644
   with_items:
-    - 01-local-syslog-input.conf
+    #    - 01-local-syslog-input.conf
     - 02-logstash-forwarder-input.conf
-    - 50-logstash-forwarder-output.conf
+      #- 50-elasticsearch-output.conf
   notify: restart logstash
 
-- name: Config - Filters
-  copy:
-    src={{ item }}
-    dest=/etc/logstash/conf.d/{{ item }}
-    owner=logstash
-    group=logstash
-    mode=0644
-  with_items:
-    - filter-syslog.conf
-  notify: restart logstash
+  #- name: Config - Filters
+  #  copy:
+  #    src={{ item }}
+  #    dest=/etc/logstash/conf.d/{{ item }}
+  #    owner=logstash
+  #    group=logstash
+  #    mode=0644
+  #  with_items:
+  #    - filter-syslog.conf
+  #  notify: restart logstash
 
 - name: Config - Install Plugins
   shell: /opt/logstash/bin/plugin install {{ item }}
