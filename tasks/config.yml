@@ -24,7 +24,7 @@
   notify: restart logstash
 
 - name: Config - Install Plugins
-  shell: /opt/logstash/bin/plugin {{ item }}
+  shell: /opt/logstash/bin/plugin install {{ item }}
   with_items:
     - logstash-input-lumberjack
     - logstash-filter-json
