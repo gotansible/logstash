@@ -8,23 +8,23 @@
   get_url:
     url={{ logstash_deb_url }}
     dest=/tmp/logstash.deb
-  when: "{{ logstash_deb_url }}"
+  when: logstash_deb_url
 
 - name: Debian - Install RC
   apt: deb="/tmp/logstash.deb"
   sudo: true
-  when: "{{ logstash_deb_url }}"
+  when: logstash_deb_url
 
 # logstash version 1.4
 - name: Debian - Add Logstash apt package to apt
   apt_repository:
     repo: 'deb http://packages.elasticsearch.org/logstash/1.4/debian stable main'
     state: present
-  when: not "{{ logstash_deb_url }}"
+  when: not logstash_deb_url
 
 - name: Debian - Install Logstash Package
   apt: update_cache=yes pkg=logstash state=present
-  when: not "{{ logstash_deb_url }}"
+  when: not logstash_deb_url
 
 - name: Debian - Use adm group to enable rights to /var/log
   user:
