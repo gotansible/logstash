@@ -13,5 +13,20 @@
 - name: logstash - auth
   include: auth.yml
 
+- name: logstash - disable service included with package
+  service: name=logstash state=stopped enabled=no
+
+- name: logstash - delete service included with package
+  file: src=/etc/init.d/logstash state=absent
+
 - name: logstash - service
-  include: service.yml
+  include: runit_service.yml
+  vars:
+    service_name: logstash
+    service_user: "{{logstash_user}}"
+    service_command: /opt/logstash/bin/logstash agent -f /etc/logstash/conf.d
+    service_env_vars: 
+      LS_HOME: /var/lib/logstash
+      LS_HEAP_SIZE: "500m"
+      LS_JAVA_OPTS: "${LS_JAVA_OPTS} -Djava.io.tmpdir=/var/lib/logstash"
+
