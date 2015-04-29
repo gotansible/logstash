@@ -41,8 +41,7 @@
     owner=root
     group=root
     mode=0755
-  with_dict: service_env_vars
-  when: service_env_vars 
+  with_dict: service_env_vars|default({})
   notify: restart {{ service_name }}
 
 - name: runit - set log config
@@ -64,6 +63,5 @@
 
 - name: runit - ensure started
   runit: name={{ service_name }} state=started
-
 
 
