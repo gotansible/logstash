@@ -1,36 +1,30 @@
 ---
+- shell: ulimit -Hn
+  register: logstash_current_max_file_descriptors
+  changed_when: False
+
+- name: config - set max file descriptors 
+  shell: "ulimit -n {{ logstash_max_file_descriptors }}"
+  when: logstash_current_max_file_descriptors.stdout != logstash_max_file_descriptors
+
 - name: config - Inputs and Outputs
   template:
     src={{ item }}.j2
     dest=/etc/logstash/conf.d/{{ item }}
-    owner=logstash
-    group=logstash
+    owner={{ logstash_user }}
+    group={{ logstash_user }}
     mode=0644
   with_items:
-    #  - 01-local-syslog-input.conf
+    - 01-local-syslog-input.conf
     - 02-logstash-forwarder-input.conf
       #- 50-elasticsearch-output.conf
   notify: restart logstash
 
-  #- name: Config - Filters
-  #  copy:
-  #    src={{ item }}
-  #    dest=/etc/logstash/conf.d/{{ item }}
-  #    owner=logstash
-  #    group=logstash
-  #    mode=0644
+  #- name: config - Install Plugins
+  #  shell: /opt/logstash/bin/plugin install {{ item }}
   #  with_items:
-  #    - filter-syslog.conf
-  #  notify: restart logstash
-
-- name: config - Install Plugins
-  shell: /opt/logstash/bin/plugin install {{ item }}
-  with_items:
-    - logstash-input-lumberjack
-    - logstash-filter-json
-    - logstash-output-elasticsearch
-
-- name: config - set max file descriptors
-  shell: ulimit -n {{ logstash_max_file_descriptors }}
+  #    - logstash-input-lumberjack
+  #    - logstash-filter-json
+  #    - logstash-output-elasticsearch
 
 
