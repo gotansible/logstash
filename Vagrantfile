@@ -10,6 +10,10 @@ Vagrant.configure(2) do |config|
 	config.vm.define "server" do |server|
 		server.vm.box = "hashicorp/precise64"
 		server.vm.hostname = "server"
+		server.vm.provider "vmware_fusion" do |v|
+			v.vmx["memsize"] = "1024"
+		end
+
 		server.vm.provision :ansible do |ansible|
 			ansible.playbook = "logstash.yml"
 		end
