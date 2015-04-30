@@ -23,7 +23,6 @@
 
 - name: logstash - delete service included with package
   file: path=/etc/init.d/logstash state=absent
-  when: False
 
 - name: logstash - service
   include: runit_service.yml
