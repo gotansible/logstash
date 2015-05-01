@@ -3,24 +3,36 @@
   file:
     path: "{{ logstash_ssl_dir }}"
     state: directory
+  when: logstash_sll_copy_local
 
 - name: Auth - copy cert
   copy:
-    src={{ logstash_ssl_cert_file }}
-    dest={{ logstash_ssl_dir }}/logstash.crt
+    src={{ logstash_local_ssh_cert }}
+    dest={{ logstash_ssl_cert_path }}
     mode=0644
     owner={{ logstash_user }}
     group={{ logstash_user }}
   notify: restart logstash
+  when: logstash_sll_copy_local
 
 - name: Auth - copy private key
   copy:
-    src={{ logstash_ssl_key_file }}
-    dest={{ logstash_ssl_dir }}/logstash.key
+    src={{ logstash_local_ssh_key }}
+    dest={{ logstash_ssl_key_path }}
     mode=0600
     owner={{ logstash_user }}
     group={{ logstash_user }}
   notify: restart logstash
+  when: logstash_sll_copy_local
+
+- name: ensure rights to private key
+  file:
+    path={{ logstash_ssl_key_path }}
+    mode=0600
+    owner={{ logstash_user }}
+    group={{ logstash_user }}
+  notify: restart logstash
+
 
 
 

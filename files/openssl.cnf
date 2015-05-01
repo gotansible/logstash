@@ -1,9 +1,0 @@
-#
-# OpenSSL configuration file, extensions only
-#
-
-[ req ]
-x509_extensions = v3_ca
-
-[ v3_ca ]
-subjectAltName = IP:192.168.50.9

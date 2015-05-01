@@ -1,12 +1,17 @@
-logstash_ssl_dir: /etc/pki/logstash
 logstash_local_syslog_path: /var/log/syslog
 logstash_forwarder_port: 12345
 logstash_elasticsearch_host: localhost
 
-logstash_ssl_key_file: myssl.key
-logstash_ssl_cert_file: myssl.crt
+logstash_ssl_key_path: /etc/pki/selfsign/private/logstash.key
+logstash_ssl_cert_path: /etc/pki/selfsign/certs/logstash.crt
+
+logstash_sll_copy_local: false
+logstash_local_ssh_cert: /path/to/copy
+logstash_local_ssh_key: /path/to/copy
 
 logstash_max_file_descriptors: 16384
 logstash_user: logstash
 
 logstash_deb_url: http://download.elastic.co/logstash/logstash/packages/debian/logstash_1.5.0-rc3-1_all.deb
+
+logstash_selfsign: false

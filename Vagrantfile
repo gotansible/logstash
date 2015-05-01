@@ -13,9 +13,10 @@ Vagrant.configure(2) do |config|
 		server.vm.provider "vmware_fusion" do |v|
 			v.vmx["memsize"] = "1024"
 		end
+		server.vm.network "private_network", ip: "192.168.50.9"
 
 		server.vm.provision :ansible do |ansible|
-			ansible.playbook = "logstash.yml"
+			ansible.playbook = "test.yml"
 		end
 	end
 

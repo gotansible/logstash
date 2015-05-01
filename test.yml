@@ -2,8 +2,11 @@
 - hosts: all
   sudo: true
   vars:
-    logstash_ssl_certificate_file: myssl.crt
-    logstash_ssl_key_file: myssl.key
+    logstash_selfsign: true
+    selfsign_folder: /etc/pki/selfsign
+    selfsign_next_cert_name: logstash
+    logstash_ssl_certificate_path: "{{selfsign_folder}}/certs/{{selfsign_next_cert_name}}.crt"
+    logstash_ssl_key_path: "{{selfsign_folder}}/private/{{selfsign_next_cert_name}}.key"
 
   roles:
     - {role: logstash }
