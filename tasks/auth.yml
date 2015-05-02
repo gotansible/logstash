@@ -1,14 +1,9 @@
 ---
-- name: Auth - create key root folder
-  file:
-    path: "{{ logstash_ssl_dir }}"
-    state: directory
-  when: logstash_sll_copy_local
 
 - name: Auth - copy cert
   copy:
-    src={{ logstash_local_ssh_cert }}
-    dest={{ logstash_ssl_cert_path }}
+    src={{ logstash_local_cert }}
+    dest={{ logstash_cert }}
     mode=0644
     owner={{ logstash_user }}
     group={{ logstash_user }}
@@ -17,8 +12,8 @@
 
 - name: Auth - copy private key
   copy:
-    src={{ logstash_local_ssh_key }}
-    dest={{ logstash_ssl_key_path }}
+    src={{ logstash_local_key }}
+    dest={{ logstash_key }}
     mode=0600
     owner={{ logstash_user }}
     group={{ logstash_user }}
@@ -27,7 +22,8 @@
 
 - name: ensure rights to private key
   file:
-    path={{ logstash_ssl_key_path }}
+    path={{ logstash_key }}
+    state=file
     mode=0600
     owner={{ logstash_user }}
     group={{ logstash_user }}

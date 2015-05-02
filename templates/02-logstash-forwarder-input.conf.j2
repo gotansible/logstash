@@ -2,7 +2,7 @@ input {
 	lumberjack {
 		port => {{ logstash_forwarder_port }}
 		type => "logs"
-		ssl_certificate => "{{ logstash_ssl_cert_path }}"
-		ssl_key => "{{ logstash_ssl_key_path }}"
+		ssl_certificate => "{{ logstash_cert }}"
+		ssl_key => "{{ logstash_key }}"
 	}
 }
