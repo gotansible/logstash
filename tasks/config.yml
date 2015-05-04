@@ -1,11 +1,4 @@
 ---
-- shell: ulimit -Hn
-  register: logstash_current_max_file_descriptors
-  changed_when: False
-
-- name: config - set max file descriptors 
-  shell: "ulimit -n {{ logstash_max_file_descriptors }}"
-  when: logstash_current_max_file_descriptors.stdout != logstash_max_file_descriptors
 
 - name: config - Inputs and Outputs
   template:
