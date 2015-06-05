@@ -25,15 +25,4 @@
   file: path=/etc/init.d/logstash state=absent
 
 - name: logstash - service
-  include: runit_service.yml
-  vars:
-    service_name: logstash
-    service_user: "{{logstash_user}}"
-    service_group: adm
-    service_command: /opt/logstash/bin/logstash agent -f /etc/logstash/conf.d
-    service_env_vars: 
-      LS_HOME: /var/lib/logstash
-      LS_HEAP_SIZE: "500m"
-      LS_JAVA_OPTS: "-Djava.io.tmpdir=/var/lib/logstash"
-      HOME: /var/lib/logstash
-
+  include: service.yml

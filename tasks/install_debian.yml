@@ -12,7 +12,6 @@
 
 - name: Debian - Install RC
   apt: deb="/tmp/logstash.deb"
-  sudo: true
   when: logstash_deb_url
 
 # logstash version 1.4

@@ -1,0 +1,18 @@
+---
+
+- name: service - setup and run
+  runit:
+    name: logstash
+    enabled: yes
+    state: up
+    timeout: 10
+    user: "{{ logstash_user }}"
+    group: adm
+    command: /opt/logstash/bin/logstash agent -f /etc/logstash/conf.d
+    env_vars:
+      LS_HOME: /var/lib/logstash
+      LS_HEAP_SIZE: "500m"
+      LS_JAVA_OPTS: "-Djava.io.tmpdir=/var/lib/logstash"
+      HOME: /var/lib/logstash
+  register: logstash_service_status
+

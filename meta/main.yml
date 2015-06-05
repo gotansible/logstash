@@ -1,6 +1,6 @@
 ---
 dependencies:
   - { role : williamyeh.oracle-java, java_version: 8 }
-  - { role : bakins.runit }
+  - { role : gotansible.runit }
   - role: gotansible.selfsign 
     when: logstash_selfsign
