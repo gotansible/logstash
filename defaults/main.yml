@@ -13,7 +13,7 @@ logstash_local_key: /path/to/copy
 logstash_max_file_descriptors: 16384
 logstash_user: logstash
 
-logstash_deb_url: http://download.elastic.co/logstash/logstash/packages/debian/logstash_1.5.0-rc3-1_all.deb
+logstash_deb_url: http://download.elastic.co/logstash/logstash/packages/debian/logstash_1.5.0-1_all.deb
 
 logstash_selfsign: false
 

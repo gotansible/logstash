@@ -1,4 +1,11 @@
 ---
+
+- name: debian - add dependencies
+  apt:
+    name=libc6-dev
+    update_cache=yes
+    state=latest
+
 - name: Debian - Add package verify key
   apt_key:
     url: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
