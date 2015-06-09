@@ -13,6 +13,10 @@
 - name: logstash - auth
   include: auth.yml
 
+- name: logstash - auth
+  include: auth_fetch.yml
+  when: logstash_fetch_auth
+
 - stat: path=/etc/init.d/logstash
   register: logstash_oldservice
 

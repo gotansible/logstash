@@ -4,6 +4,7 @@ logstash_elasticsearch_host: localhost
 
 logstash_cert: /etc/pki/selfsign/certs/logstash.crt
 logstash_key: /etc/pki/selfsign/private/logstash.key
+logstash_ca: /etc/pki/selfsign/CA/selfsignCA.pem
 
 logstash_sll_copy_local: false
 logstash_local_cert: /path/to/copy
@@ -15,3 +16,6 @@ logstash_user: logstash
 logstash_deb_url: http://download.elastic.co/logstash/logstash/packages/debian/logstash_1.5.0-rc3-1_all.deb
 
 logstash_selfsign: false
+
+logstash_fetch_auth: false
+logstash_fetch_auth_to: /tmp/deleteme

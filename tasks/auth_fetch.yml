@@ -1,0 +1,30 @@
+---
+
+- name: auth - ensure fetch dir exists
+  file:
+    state=directory
+    path={{ logstash_fetch_auth_to }}
+  when: logstash_fetch_auth
+
+- name: auth - fetch key
+  fetch:
+    src={{ logstash_key }}
+    dest={{ logstash_fetch_auth_to }}
+    mode=0600
+    flat=yes
+  when: logstash_fetch_auth
+
+- name: auth - fetch cert
+  fetch:
+    src={{ logstash_cert}}
+    dest={{ logstash_fetch_auth_to }}
+    flat=yes
+  when: logstash_fetch_auth
+
+- name: auth - fetch CA
+  fetch:
+    src={{ logstash_ca }}
+    dest={{ logstash_fetch_auth_to }}
+    flat=yes
+  when: logstash_fetch_auth
+

@@ -2,13 +2,14 @@
 - hosts: all
   sudo: true
   vars:
-    logstash_selfsign: true
     selfsign_folder: /etc/pki/selfsign
     selfsign_next_cert_name: logstash
-    logstash_ssl_certificate_path: "{{selfsign_folder}}/certs/{{selfsign_next_cert_name}}.crt"
-    logstash_ssl_key_path: "{{selfsign_folder}}/private/{{selfsign_next_cert_name}}.key"
 
   roles:
-    - {role: logstash }
-
-
+    - role: logstash 
+      logstash_selfsign: true
+      logstash_ssl_certificate_path: "{{selfsign_folder}}/certs/{{selfsign_next_cert_name}}.crt"
+      logstash_ssl_key_path: "{{selfsign_folder}}/private/{{selfsign_next_cert_name}}.key"
+      logstash_ssl_ca_path: "{{selfsign_folder}}/CA/{{selfsign_next_cert_name}}.pem"
+      logstash_fetch_auth: true
+      logstash_fetch_auth_to: /tmp/deleteme
