@@ -10,7 +10,7 @@
   with_items:
     - 01-local-syslog-input.conf
     - 02-logstash-forwarder-input.conf
-      #- 50-elasticsearch-output.conf
+    - 50-elasticsearch-output.conf
   notify: restart logstash
 
   #- name: config - Install Plugins

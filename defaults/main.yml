@@ -1,6 +1,7 @@
 logstash_local_syslog_path: /var/log/syslog
 logstash_forwarder_port: 12345
-logstash_elasticsearch_host: localhost
+logstash_elasticsearch_hosts: 
+  -localhost
 
 logstash_cert: /etc/pki/selfsign/certs/logstash.crt
 logstash_key: /etc/pki/selfsign/private/logstash.key
