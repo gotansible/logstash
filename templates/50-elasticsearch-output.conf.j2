@@ -3,7 +3,7 @@ output {
 		host => [
 {% for host in logstash_elasticsearch_hosts %}
 		{% if loop.index0 > 0 %},{% endif %}
-		"host:9300"
+		"{{ host }}:9300"
 {% endfor %}
 		]
 	}
