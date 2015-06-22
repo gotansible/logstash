@@ -1,16 +1,22 @@
 filter {
-    if [type] == "json" {
-        json {
-            source => "message"
+	if [type] == "json" {
+		json {
+		    source => "message"
 			add_field => { "layer" => "%{layer}" }
 			add_field => { "site" => "%{site}" }
 			add_field => { "host" => "%{host}" }
-        }
-    }
+		}
+	}
 
-    if [type] == "syslog" {
-        grok {
-            match => { "message" => "%{SYSLOGLINE}" }
-        }
-    }
+	if [type] == "syslog" {
+		grok {
+			match => { "message" => "%{SYSLOGLINE}" }
+		}
+	}
+
+	if [type] == "haproxy" {
+		grok {
+			match => ["message", "%{HAPROXYHTTP}"]
+		}
+	}
 }
