@@ -1,32 +1,50 @@
 ---
 - name: logstash - install debian
   include: install_debian.yml
+  tags:
+    - install
   when: ansible_os_family == "Debian"
 
 - name: logstash - install centos
   include: install_centos.yml
+  tags:
+    - install
   when: ansible_os_family == "RedHat"
 
 - name: logstash - configure
+  tags:
+    - config
   include: config.yml
 
 - name: logstash - auth
   include: auth.yml
+  tags:
+    - config
 
 - name: logstash - auth
   include: auth_fetch.yml
+  tags:
+    - config
   when: logstash_fetch_auth
 
 - stat: path=/etc/init.d/logstash
   register: logstash_oldservice
+  tags:
+    - service
 
 - name: logstash - disable service included with package
   service: name=logstash state=stopped enabled=no
+  tags:
+    - service
   when: logstash_oldservice.stat.exists
   ignore_errors: yes
 
 - name: logstash - delete service included with package
+  tags:
+    - service
   file: path=/etc/init.d/logstash state=absent
 
 - name: logstash - service
+  tags:
+    - service
   include: service.yml
