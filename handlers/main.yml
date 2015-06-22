@@ -1,11 +1,6 @@
 ---
 
 - name: restart logstash
-  runit: 
-    name=logstash
-    action=restart
-    state=up
-    enabled=true
-    timeout=9
+  shell: sv restart logstash
   when: not logstash_service_status.restarted
 
