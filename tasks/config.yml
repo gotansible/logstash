@@ -27,9 +27,11 @@
 
 - name: config - elastic search templates
   copy:
-    src=ossec_template.json
+    src={{ item }}
     dest=/etc/logstash/elasticsearch/
     owner={{ logstash_user }}
     group={{ logstash_user }}
     mode=0644
+  with_items:
+    - elasticsearch/ossec_template.json
 
