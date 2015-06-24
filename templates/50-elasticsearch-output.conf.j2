@@ -15,6 +15,18 @@ output {
 			template => "/etc/logstash/elasticsearch/ossec_template.json"
 			template_overwrite => true
 		}
+	} if [role] == "ossec" and [type] == "syslog" {
+		elasticsearch {
+			cluster => "logsearch"
+			protocol => "transport"
+			host => [
+			{% for host in logstash_elasticsearch_hosts %}
+			{% if loop.index0 > 0 %},{% endif %}
+			"{{ host }}:9300"
+			{% endfor %}
+			]
+			document_type => "ossec"
+		}
 	} else {
 		elasticsearch {
 			cluster => "logsearch"
