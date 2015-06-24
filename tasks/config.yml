@@ -1,9 +1,21 @@
 ---
 
+- name: config - directories
+  file:
+    state=directory
+    path=/etc/logstash/elasticsearch
+    owner={{ logstash_user }}
+    group={{ logstash_user }}
+
+- name: config - remove conf.d folder
+  file:
+    state=absent
+    path=/etc/logstash/elasticsearch/conf.d
+
 - name: config - Inputs and Outputs
   template:
     src={{ item }}.j2
-    dest=/etc/logstash/conf.d/{{ item }}
+    dest=/etc/logstash/{{ item }}
     owner={{ logstash_user }}
     group={{ logstash_user }}
     mode=0644
@@ -12,6 +24,7 @@
     - 02-logstash-forwarder-input.conf
     - 10-basic-filters.conf
     - 50-elasticsearch-output.conf
+    - elasticsearch/ossec_template.json
   notify: restart logstash
 
   #- name: config - Install Plugins

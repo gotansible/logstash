@@ -8,6 +8,12 @@ filter {
 		}
 	}
 
+	if [role] == "ossec" {
+		geoip {
+			source => "src_ip"
+		}
+	}
+
 	if [type] == "syslog" {
 		grok {
 			match => { "message" => "%{SYSLOGLINE}" }

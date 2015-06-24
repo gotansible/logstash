@@ -8,7 +8,7 @@
     timeout: 10
     user: "{{ logstash_user }}"
     group: adm
-    command: /opt/logstash/bin/logstash agent -f /etc/logstash/conf.d
+    command: /opt/logstash/bin/logstash agent -f /etc/logstash/
     env_vars:
       LS_HOME: /var/lib/logstash
       LS_HEAP_SIZE: "500m"

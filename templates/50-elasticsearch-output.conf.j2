@@ -1,12 +1,30 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
 output {
-	elasticsearch {
-		cluster => "logsearch"
-		protocol => "transport"
-		host => [
-	{% for host in logstash_elasticsearch_hosts %}
-		{% if loop.index0 > 0 %},{% endif %}
-		"{{ host }}:9300"
-	{% endfor %}
-		]
+	if [role] == "ossec" and [type] == "json" {
+		elasticsearch {
+			cluster => "logsearch"
+			protocol => "transport"
+			host => [
+			{% for host in logstash_elasticsearch_hosts %}
+			{% if loop.index0 > 0 %},{% endif %}
+			"{{ host }}:9300"
+			{% endfor %}
+			]
+			document_type => "ossec"
+			template_name => "ossec-json"
+			template => "/etc/logstash/elasticsearch/ossec_template.json"
+			template_overwrite => true
+		}
+	} else {
+		elasticsearch {
+			cluster => "logsearch"
+			protocol => "transport"
+			host => [
+			{% for host in logstash_elasticsearch_hosts %}
+			{% if loop.index0 > 0 %},{% endif %}
+			"{{ host }}:9300"
+			{% endfor %}
+			]
+		}
 	}
 }

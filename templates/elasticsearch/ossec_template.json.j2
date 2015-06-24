@@ -1,0 +1,103 @@
+{
+  "template":"logstash-ossec-*",
+  "settings":{
+    "index.analysis.analyzer.default.stopwords":"_none_",
+    "index.refresh_interval":"5s",
+    "index.analysis.analyzer.default.type":"standard"
+  },
+  "mappings":{
+    "ossec":{
+      "properties":{
+        "@fields.hostname":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "@fields.product":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "@message":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "@timestamp":{
+          "type":"date"
+        },
+        "@version":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+		"rule":{
+          "type":"integer"
+        },
+		"level":{
+          "type":"integer"
+        },
+        "comment":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+		"sdid":{
+          "type":"integer"
+        },
+        "cve":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "action":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "srcip":{
+          "type":"string",
+          "index":"analyzed"
+        },
+        "srcport":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "srcuser":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "dstip":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "dstport":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "dstuser":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "location":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "full_log":{
+          "type":"string",
+          "index":"not_analyzed"
+        },
+        "geoip":{
+          "type" : "object",
+          "dynamic": true,
+          "path": "full",
+          "properties" : {
+            "location" : { "type" : "geo_point" }
+          }
+        },
+		"file":{
+          "type" : "object",
+          "dynamic": true,
+          "path": "full"
+        }
+      },
+      "_all":{
+        "enabled":true
+      }
+    }
+  }
+}
+
