@@ -11,10 +11,7 @@ output {
 			{% endfor %}
 			]
 			document_type => "ossec"
-			template_name => "ossec-json"
-			template => "/etc/logstash/elasticsearch/ossec_template.json"
-			template_overwrite => true
-		}
+				}
 	} if [role] == "ossec" and [type] == "syslog" {
 		elasticsearch {
 			cluster => "logsearch"
@@ -26,6 +23,9 @@ output {
 			{% endfor %}
 			]
 			document_type => "ossec"
+			template_name => "ossec-json"
+			template => "/etc/logstash/elasticsearch/ossec_template.json"
+			template_overwrite => true
 		}
 	} else {
 		elasticsearch {
