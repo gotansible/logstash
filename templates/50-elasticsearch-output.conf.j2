@@ -12,7 +12,7 @@ output {
 			]
 			document_type => "ossec"
 				}
-	} if [role] == "ossec" and [type] == "syslog" {
+	} else if [role] == "ossec" and [type] == "syslog" {
 		elasticsearch {
 			cluster => "logsearch"
 			protocol => "transport"
@@ -22,10 +22,23 @@ output {
 			"{{ host }}:9300"
 			{% endfor %}
 			]
+			index => "logstash-ossec-%{+YYYY.MM.dd}"
 			document_type => "ossec"
-			template_name => "ossec-json"
+			template_name => "ossec-syslog"
 			template => "/etc/logstash/elasticsearch/ossec_template.json"
 			template_overwrite => true
+		}
+	} else if [role] == "system" and [type] == "syslog" {
+		elasticsearch {
+			cluster => "logsearch"
+			protocol => "transport"
+			host => [
+			{% for host in logstash_elasticsearch_hosts %}
+			{% if loop.index0 > 0 %},{% endif %}
+			"{{ host }}:9300"
+			{% endfor %}
+			index => "logstash-syslog-%{+YYYY.MM.dd}"
+			]
 		}
 	} else {
 		elasticsearch {
