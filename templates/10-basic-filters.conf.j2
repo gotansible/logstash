@@ -8,12 +8,6 @@ filter {
 		}
 	}
 
-	if [role] == "ossec" {
-		geoip {
-			source => "src_ip"
-		}
-	}
-
 	if [type] == "syslog" and [role] == "ossec" {
 		# Parse the header of the alert
 		grok {
