@@ -11,6 +11,7 @@ output {
 			{% endfor %}
 			]
 			document_type => "ossec"
+			index => "logstash-ossec-%{+YYYY.MM.dd}"
 		}
 	} else if [role] == "ossec" and [type] == "syslog" {
 		elasticsearch {
@@ -39,6 +40,18 @@ output {
 			{% endfor %}
 			]
 			index => "logstash-syslog-%{+YYYY.MM.dd}"
+		}
+	} else if [role] == "nginx" and [type] == "json" {
+		elasticsearch {
+			cluster => "logsearch"
+			protocol => "transport"
+			host => [
+			{% for host in logstash_elasticsearch_hosts %}
+			{% if loop.index0 > 0 %},{% endif %}
+			"{{ host }}:9300"
+			{% endfor %}
+			]
+			index => "logstash-nginx-%{+YYYY.MM.dd}"
 		}
 	} else {
 		elasticsearch {
