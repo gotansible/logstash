@@ -9,7 +9,7 @@ filter {
 	}
 
 	if [type] == "syslog" and [role] == "ossec" {
-		codec => multiline {
+		multiline {
 			pattern => "^\*\*"
 			negate => true
 			what => "previous"
