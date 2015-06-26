@@ -1,5 +1,8 @@
 ---
 
+- name: service - test config
+  shell: /opt/logstash/bin/logstash agent --configtest -f /etc/logstash/
+
 - name: service - setup and run
   runit:
     name: logstash
@@ -8,7 +11,7 @@
     timeout: 10
     user: "{{ logstash_user }}"
     group: adm
-    command: /opt/logstash/bin/logstash agent --configtest -f /etc/logstash/ && /opt/logstash/bin/logstash agent -f /etc/logstash/
+    command: /opt/logstash/bin/logstash agent -f /etc/logstash/
     env_vars:
       LS_HOME: /var/lib/logstash
       LS_HEAP_SIZE: "500m"
