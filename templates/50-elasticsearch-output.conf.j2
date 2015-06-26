@@ -25,14 +25,15 @@ output {
 			]
 			index => "logstash-ossec-%{+YYYY.MM.dd}"
 			document_type => "ossec"
-			template_name => "ossec-syslog"
-			template => "/etc/logstash/elasticsearch/ossec_template.json"
-			template_overwrite => true
+			#template_name => "ossec-syslog"
+			#template => "/etc/logstash/elasticsearch/ossec_template.json"
+			#template_overwrite => true
 		}
 	} else if [role] == "system" and [type] == "syslog" {
 		elasticsearch {
 			cluster => "logsearch"
 			protocol => "transport"
+			document_type => "system"
 			host => [
 			{% for host in logstash_elasticsearch_hosts %}
 			{% if loop.index0 > 0 %},{% endif %}
@@ -45,6 +46,7 @@ output {
 		elasticsearch {
 			cluster => "logsearch"
 			protocol => "transport"
+			document_type => "nginx"
 			host => [
 			{% for host in logstash_elasticsearch_hosts %}
 			{% if loop.index0 > 0 %},{% endif %}
