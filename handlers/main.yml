@@ -1,6 +1,6 @@
 ---
 
 - name: restart logstash
-  shell: sv restart logstash
+  shell: /opt/logstash/bin/logstash agent --configtest -f /etc/logstash/ && sv restart logstash
   when: not logstash_service_status.restarted
 

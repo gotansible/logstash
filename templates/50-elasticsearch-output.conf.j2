@@ -11,7 +11,7 @@ output {
 			{% endfor %}
 			]
 			document_type => "ossec"
-				}
+		}
 	} else if [role] == "ossec" and [type] == "syslog" {
 		elasticsearch {
 			cluster => "logsearch"
@@ -37,8 +37,8 @@ output {
 			{% if loop.index0 > 0 %},{% endif %}
 			"{{ host }}:9300"
 			{% endfor %}
-			index => "logstash-syslog-%{+YYYY.MM.dd}"
 			]
+			index => "logstash-syslog-%{+YYYY.MM.dd}"
 		}
 	} else {
 		elasticsearch {
