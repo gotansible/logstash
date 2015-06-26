@@ -9,6 +9,12 @@ filter {
 	}
 
 	if [type] == "syslog" and [role] == "ossec" {
+		codec => multiline {
+			pattern => "^\*\*"
+			negate => true
+			what => "previous"
+		}
+
 		# Parse the header of the alert
 		grok {
 			# Matches  2014 Mar 08 00:57:49 (some.server.com) 10.1.2.3->ossec
