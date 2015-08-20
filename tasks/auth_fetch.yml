@@ -1,6 +1,7 @@
 ---
 
 - name: auth - ensure fetch dir exists
+  sudo: false
   local_action: file state=directory path={{ logstash_fetch_auth_to }}
   when: logstash_fetch_auth
 
