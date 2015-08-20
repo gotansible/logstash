@@ -1,9 +1,7 @@
 ---
 
 - name: auth - ensure fetch dir exists
-  file:
-    state=directory
-    path={{ logstash_fetch_auth_to }}
+  local_action: file state=directory path={{ logstash_fetch_auth_to }}
   when: logstash_fetch_auth
 
 - name: auth - fetch key
