@@ -1,0 +1,11 @@
+---
+
+# from galaxy
+- src: williamyeh.oracle-java
+
+- src: https://github.com/gotansible/runit
+  name: gotansible.runit
+
+- src: https://github.com/gotansible/selfsign
+  name: gotansible.selfsign
+

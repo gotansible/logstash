@@ -24,7 +24,7 @@
 # logstash version 1.4
 - name: Debian - Add Logstash apt package to apt
   apt_repository:
-    repo: 'deb http://packages.elasticsearch.org/logstash/1.4/debian stable main'
+    repo: "{{ logstash_deb_package }}"
     state: present
   when: not logstash_deb_url
 
