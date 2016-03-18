@@ -28,6 +28,7 @@
     owner={{ logstash_user }}
     group={{ logstash_user }}
   notify: restart logstash
+  when: logstash_sll_copy_local
 
 
 
