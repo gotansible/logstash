@@ -8,7 +8,17 @@
     owner={{ logstash_user }}
     group={{ logstash_user }}
   notify: restart logstash
-  when: logstash_sll_copy_local
+  when: logstash_sll_copy
+
+- name: Auth - copy ca
+  copy:
+    src={{ logstash_local_ca }}
+    dest={{ logstash_ca }}
+    mode=0644
+    owner={{ logstash_user }}
+    group={{ logstash_user }}
+  notify: restart logstash
+  when: logstash_sll_copy
 
 - name: Auth - copy private key
   copy:
@@ -18,7 +28,7 @@
     owner={{ logstash_user }}
     group={{ logstash_user }}
   notify: restart logstash
-  when: logstash_sll_copy_local
+  when: logstash_sll_copy
 
 - name: ensure rights to private key
   file:
@@ -28,7 +38,7 @@
     owner={{ logstash_user }}
     group={{ logstash_user }}
   notify: restart logstash
-  when: logstash_sll_copy_local
+  when: logstash_sll_copy
 
 
 
