@@ -8,9 +8,9 @@ logstash_key: /etc/pki/selfsign/private/logstash.key
 logstash_ca: /etc/pki/selfsign/CA/selfsignCA.pem
 
 logstash_sll_copy: false
-logstash_local_cert: {{ logstash_cert }}
-logstash_local_key: {{ logstash_key }}
-logstash_local_ca: {{ logstash_ca }}
+logstash_local_cert: "{{ logstash_cert }}"
+logstash_local_key: "{{ logstash_key }}"
+logstash_local_ca: "{{ logstash_ca }}"
 
 logstash_max_file_descriptors: 16384
 logstash_user: logstash
